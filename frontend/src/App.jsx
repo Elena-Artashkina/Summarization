@@ -79,6 +79,7 @@ function App() {
               <OutputTextArea 
                 summary={summary}
                 loading={isLoading}
+                onSummaryChange={setSummary}
               />
             </Col>
           </Row>
