@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend  # Путь к папке с бэкендом (где Dockerfile)
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+    # depends_on:
+    #   - redis  # Если используете Redis
+
+  frontend:
+    build: ./frontend  # Путь к папке с фронтендом
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  # redis:  # Раскомментируйте если нужно
+  #   image: redis:alpine
+  #   ports:
+  #     - "6379:6379"
