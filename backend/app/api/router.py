@@ -8,10 +8,10 @@ router = APIRouter()
 async def summarize_text_endpoint(text: TextRequest):
     """Генерирует саммари по исходному тексту.
     
-    Параметр:
+    Request:
     TextRequest : str
     
-    Возвращает:
+    Responce:
     summary : str"""
     
     summary = summarize_text(text.text)

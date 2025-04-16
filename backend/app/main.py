@@ -2,7 +2,9 @@ from fastapi import FastAPI
 from app.api.router import router
 from fastapi.middleware.cors import CORSMiddleware  
 
-app = FastAPI()
+app = FastAPI(
+    title='Summarization'
+)
 
 app.include_router(router, prefix="/api/v1")
 
