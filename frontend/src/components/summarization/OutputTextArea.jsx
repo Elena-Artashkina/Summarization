@@ -37,10 +37,10 @@ function OutputTextArea({ summary, loading, onSummaryChange }) {  // Добав�
         />
       )}
       
-      <div style={{ marginTop: '20px' }}>
+      {/* <div style={{ marginTop: '20px' }}>
         <strong>Текущее резюме:</strong>
         <p>{previewValue}</p>
-      </div>
+      </div> */}
     </div>
   );
 }
