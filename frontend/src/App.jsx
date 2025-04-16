@@ -49,17 +49,24 @@ function App() {
       <Container maxWidth="xxl">
         <div>
           <Header />
-          <br />
+          
           <br />
           <br />
           <h1>Сгенерируй саммари по своему тексту</h1> 
           <p>Вставь текст в форму ниже и получи краткое содержание</p>
           {error && <div style={{ color: 'red' }}>{error}</div>}
-          <br />
+
         </div>
       </Container>
 
       <Container maxWidth="lg">
+      <Row>
+        <Col span={24} style={{ paddingLeft: '25px' }}>
+          <ButtonUploadFiles 
+          onTextExtracted={handleFileUpload}
+          />
+       </Col>
+      </Row>
         <div>
           <Row>
             <Col span={12}>
@@ -69,11 +76,11 @@ function App() {
                 onChange={(e) => setInputText(e.target.value)} 
               />
               {/* <ButtonUploadFiles /> */}
-              <ButtonUploadFiles onTextExtracted={handleFileUpload} />
-              <ButtonSummarize 
+              
+              {/* <ButtonSummarize 
                 onClick={handleSummarize}
                 disabled={!inputText.trim() || isLoading}
-              />
+              /> */}
             </Col>
             <Col span={12}>
               <OutputTextArea 
@@ -83,6 +90,13 @@ function App() {
               />
             </Col>
           </Row>
+        </div>
+        <br></br>
+        <div style={{ display: 'grid', placeItems: 'center' }}>
+          <ButtonSummarize 
+            onClick={handleSummarize}
+            disabled={!inputText.trim() || isLoading}
+          />
         </div>
       </Container>
     </>

@@ -49,9 +49,15 @@ export default function InputFileUpload({ onTextExtracted }) {
       role={undefined}
       variant="contained"
       tabIndex={-1}
-      startIcon={<CloudUploadIcon />}
+      startIcon={<CloudUploadIcon fontSize="small"/>}
+      sx={{
+        fontSize: '0.8rem',
+        // textTransform: 'none'
+        // padding: '4px 8px',
+        // minWidth: 'auto'
+      }}
     >
-      Загрузить .txt файл
+      Загрузить
       <VisuallyHiddenInput
         type="file"
         onChange={handleFileChange}
