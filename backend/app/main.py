@@ -2,9 +2,18 @@ from fastapi import FastAPI
 from app.api.router import router
 from fastapi.middleware.cors import CORSMiddleware  
 
+from .models.summarization import Summary
+
+from .common import BaseEntity
+from app.core import db
+
 app = FastAPI(
     title='Summarization'
 )
+
+# BaseEntity.metadata.drop_all(bind=db.engine, tables=[BaseEntity.metadata.tables["Summarization"]])
+
+BaseEntity.metadata.create_all(bind=db.engine)
 
 app.include_router(router, prefix="/api/v1")
 

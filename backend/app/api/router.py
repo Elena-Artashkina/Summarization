@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from ..ml.model import summarize_text
-from .schemas import TextRequest
+# from .schemas import TextRequest
+from ..schemas.text import TextRequest
 
 router = APIRouter()
 
