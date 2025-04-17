@@ -1,2 +1,5 @@
 .venv
 .env
+
+app/core/__pycache__/
+app/models/__pycache__/
