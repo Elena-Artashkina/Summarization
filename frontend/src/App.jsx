@@ -46,8 +46,9 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="xxl">
+      <Container maxWidth="xl">
         <div>
+          <br></br>
           <Header />
           
           <br />
@@ -98,6 +99,7 @@ function App() {
             disabled={!inputText.trim() || isLoading}
           />
         </div>
+        
       </Container>
     </>
   );

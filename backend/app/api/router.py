@@ -16,6 +16,7 @@ async def summarize_text_endpoint(text: TextRequest, db : Session = Depends(get_
     
     Args:
         text (TextRequest): Исходный текст.
+        db (Session): Сессия SQLAlchemy для работы с БД.
     
     Returns:
         summary (str): Суммаризированный текст.
