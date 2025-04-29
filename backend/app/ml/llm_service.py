@@ -17,16 +17,20 @@
 from llama_cpp import Llama
 from pathlib import Path
 
+MODEL_PATH = Path(__file__).parent / "models" / "model-q4_K.gguf"
+
 # Инициализация модели
 llm = Llama(
-    model_path="./models/model-q4_K.gguf",
+    # model_path="./models/model-q4_K.gguf",
+    model_path=str(MODEL_PATH),
     n_ctx=1024,
     # n_gpu_layers=-1  # Раскомментировать для GPU
 )
 
 def load_prompt_template() -> str:
     """Загружает шаблон промпта из файла"""
-    prompt_path = Path("./prompts/summary_prompt.txt")
+    # prompt_path = Path("./prompts/summary_prompt.txt")
+    prompt_path = Path(__file__).parent / "prompts" / "summary_prompt.txt"
     return prompt_path.read_text(encoding="utf-8")
 
 def summarize(text: str) -> str:
@@ -52,7 +56,7 @@ input_text = """
     Домой я возвращаюсь около восьми, особенно если захожу в магазин.
 """
     
-result = summarize(input_text)
-print("Результат суммаризации:\n", result)
+# result = summarize(input_text)
+# print("Результат суммаризации:\n", result)
 
 
