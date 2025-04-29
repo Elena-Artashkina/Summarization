@@ -1,6 +1,6 @@
  # Summarization Service
 
-Сервис для генерации суммаризаций текста с использованием FastAPI и PostgreSQL.
+Сервис для генерации суммаризаций текста с использованием LLama-cpp, FastAPI, React и PostgreSQL.
 
 ## 🚀 Features
 
@@ -10,16 +10,17 @@
 
 ## 🛠️ Технологии
 
-- Python 3.10+
+- Python 3.12+
 - FastAPI
 - SQLAlchemy 2.0
 - PostgreSQL 14+
 - Pydantic V2
-- Uvicorn
 
 ## Preview
 
 <img src="./preview.png"/>
+![alt text](https://github.com/Elena-Artashkina/Summarization/blob/master/preview.png)
+
 
 ## ⚙️ Установка
 
