@@ -1,0 +1,19 @@
+# Зависимости
+node_modules/
+dist/
+
+# Файлы окружения
+.env
+.env.local
+
+# Логи
+npm-debug.log*
+
+# Git и IDE
+.git/
+.idea/
+.vscode/
+
+# Тесты
+coverage/
+*.spec.js

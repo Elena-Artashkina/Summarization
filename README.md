@@ -19,8 +19,6 @@
 ## Preview
 
 <img src="./preview.png"/>
-![alt text](https://github.com/Elena-Artashkina/Summarization/blob/master/preview.png)
-
 
 ## ⚙️ Установка
 

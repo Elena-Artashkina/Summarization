@@ -1,0 +1,12 @@
+.env
+venv/
+
+.\app\schemas\__pycache__
+.\app\models\__pycache__
+.\app\ml\__pycache__
+.\app\crud\__pycache__
+.\app\core\__pycache__
+.\app\api\__pycache__
+.\app\api\__pycache__
+.\app\__pycache__
+.\__pycache__
