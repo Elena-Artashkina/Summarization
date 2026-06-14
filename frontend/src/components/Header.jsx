@@ -10,9 +10,9 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Theme', 'RU'];
+const pages = ['Облако слов'];
 
-function ResponsiveAppBar() {
+function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -23,10 +23,31 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
+  // Функция для плавной прокрутки к секции облака слов
+  const scrollToWordCloud = () => {
+    const wordCloudSection = document.getElementById('wordcloud-section');
+    if (wordCloudSection) {
+      wordCloudSection.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+    handleCloseNavMenu();
+  };
+
   return (
-    <AppBar position="static" elevation={0} sx={{ backgroundColor: 'white', color: 'black' }}>
+    <AppBar 
+      position="static" 
+      elevation={0} 
+      sx={{ 
+        backgroundColor: 'transparent !important',
+        color: '#1f2937',
+        boxShadow: 'none',
+        background: 'transparent !important',
+      }}
+    >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ minHeight: '64px' }}>
           {/* Логотип и название слева */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', mr: 2 }}>
             <img 
@@ -41,21 +62,47 @@ function ResponsiveAppBar() {
                 fontFamily: "inherit",
                 fontSize: '1.25rem',
                 letterSpacing: '.1rem',
-                color: 'inherit',
+                color: '#ffffff',
                 textDecoration: 'none',
+                fontWeight: 500,
               }}
             >
-              Summary.AI
+              смысл.txt
+            </Typography>
+          </Box>
+
+          {/* Растягивающийся Box для отталкивания надписи вправо */}
+          <Box sx={{ flexGrow: 1 }} />
+
+          {/* Надпись "Облако слов" справа с отступом */}
+          <Box sx={{ 
+            display: { xs: 'none', md: 'flex' },
+            mr: 20, // 👈 ЭТОТ ОТСТУП ОТ ПРАВОГО КРАЯ (меняйте значения: 0, 1, 2, 3, 4, 5, 10, 20 и т.д.)
+          }}>
+            <Typography
+              onClick={scrollToWordCloud}
+              sx={{ 
+                color: '#ffffff',
+                fontSize: '1rem',
+                fontWeight: 400,
+                cursor: 'pointer',
+                fontFamily: "inherit",
+                '&:hover': {
+                  opacity: 0.8,
+                }
+              }}
+            >
+              Облако слов
             </Typography>
           </Box>
 
           {/* Мобильное меню */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="menu"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              sx={{ color: '#ffffff' }}
             >
               <MenuIcon />
             </IconButton>
@@ -63,42 +110,20 @@ function ResponsiveAppBar() {
               anchorEl={anchorElNav}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              sx={{ 
+                display: { xs: 'block', md: 'none' },
+                '& .MuiPaper-root': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(10px)',
+                }
+              }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={scrollToWordCloud}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-
             </Menu>
-          </Box>
-
-          {/* Десктопное меню - центрированные кнопки */}
-          <Box sx={{ 
-            flexGrow: 1, 
-            display: { xs: 'none', md: 'flex' },
-            justifyContent: 'center', // Центрируем по горизонтали
-            position: 'absolute', // Абсолютное позиционирование
-            left: 0,
-            right: 0,
-            margin: 'auto',
-            maxWidth: 'fit-content' // Ширина по содержимому
-          }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ 
-                  my: 2, 
-                  color: 'black', 
-                  mx: 1, // Отступ между кнопками
-                  display: 'block' 
-                }}
-              >
-                {page}
-              </Button>
-            ))}
           </Box>
         </Toolbar>
       </Container>
@@ -106,4 +131,4 @@ function ResponsiveAppBar() {
   );
 }
 
-export default ResponsiveAppBar;
+export default Header;

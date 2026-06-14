@@ -8,7 +8,7 @@ function BasicButtons({ onClick, disabled }) {
       <Button 
       variant="contained"      
       onClick={onClick}
-      disabled={disabled}>Суммаризовать</Button>
+      disabled={disabled}>Обработать</Button>
     </Stack>
   );
 }

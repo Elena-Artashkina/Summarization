@@ -1,30 +1,38 @@
-// src/theme.js
-import { createTheme } from '@mui/material/styles';
+// src/context/ThemeContext.jsx
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-    background: {
-      default: '#ffffff',
-      paper: '#f5f5f5',
-    },
-    text: {
-      primary: '#000000',
-      secondary: '#333333',
-    },
-  },
-});
+const ThemeContext = createContext();
 
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    background: {
-      default: '#121212',
-      paper: '#1e1e1e',
-    },
-    text: {
-      primary: '#ffffff',
-      secondary: '#e0e0e0',
-    },
-  },
-});
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider');
+  }
+  return context;
+};
+
+export const ThemeProvider = ({ children }) => {
+  // Проверяем сохраненную тему в localStorage или системные настройки
+  const getInitialTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+    return 'light'; // По умолчанию светлая тема
+  };
+
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    document.body.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};

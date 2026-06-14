@@ -1,10 +1,19 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import { ThemeProvider } from './context/ThemeContext';
+import { TaskProvider } from './api/TaskContext';
+import './index.css';
 
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-
-createRoot(document.getElementById('root')).render(
-
-    <App />
-
-)
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <ThemeProvider>
+        <TaskProvider>
+          <App />
+        </TaskProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);

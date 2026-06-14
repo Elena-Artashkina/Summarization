@@ -1,77 +1,541 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-} */
+/* Глобальные стили и CSS переменные */
+:root {
+  --border-radius: 16px;
+  --transition: all 0.3s ease;
+}
 
+/* Светлая тема (по умолчанию) */
+[data-theme="light"] {
+  --bg-gradient-start: #f8fafc;
+  --bg-gradient-end: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-header: #1e293b;
+  --text-menu: #334155;
+  --text-menu-hover: #0f172a;
+  --card-bg: #ffffff;
+  --card-bg-blur: rgba(255, 255, 255, 0.95);
+  --card-text-title: #1e293b;
+  --card-text-description: #475569;
+  --card-border: #e2e8f0;
+  --button-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+  --button-text: #ffffff;
+  --slider-color: #94a3b8;
+  --slider-track: #cbd5e1;
+  --slider-rail: #e2e8f0;
+  --slider-thumb: #ffffff;
+  --circle-color-1: rgba(236, 72, 153, 0.12);
+  --circle-color-2: rgba(59, 130, 246, 0.1);
+  --circle-color-3: rgba(168, 85, 247, 0.08);
+  --circle-color-4: rgba(236, 72, 153, 0.06);
+  --circle-color-5: rgba(59, 130, 246, 0.05);
+  --dots-color: rgba(0, 0, 0, 0.04);
+  --footer-bg: #f8fafc;
+  --footer-text: #64748b;
+  --footer-border: #e2e8f0;
+}
+
+/* Темная тема */
+[data-theme="dark"] {
+  --bg-gradient-start: #0f172a;
+  --bg-gradient-end: #1e1b4b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-header: #f1f5f9;
+  --text-menu: #cbd5e1;
+  --text-menu-hover: #ffffff;
+  --card-bg: #1e293b;
+  --card-bg-blur: rgba(30, 41, 59, 0.95);
+  --card-text-title: #f1f5f9;
+  --card-text-description: #94a3b8;
+  --card-border: #334155;
+  --button-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+  --button-text: #ffffff;
+  --slider-color: #64748b;
+  --slider-track: #475569;
+  --slider-rail: #334155;
+  --slider-thumb: #ffffff;
+  --circle-color-1: rgba(236, 72, 153, 0.08);
+  --circle-color-2: rgba(59, 130, 246, 0.06);
+  --circle-color-3: rgba(168, 85, 247, 0.05);
+  --circle-color-4: rgba(236, 72, 153, 0.04);
+  --circle-color-5: rgba(59, 130, 246, 0.03);
+  --dots-color: rgba(255, 255, 255, 0.03);
+  --footer-bg: #0f172a;
+  --footer-text: #94a3b8;
+  --footer-border: #1e293b;
+}
+
+/* Базовые стили body */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  transition: var(--transition);
+}
+
+/* Анимированные круги */
+.shape-circle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shape-circle-1 {
+  top: -10%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--circle-color-1), transparent);
+  animation: float 25s ease-in-out infinite;
+}
+
+.shape-circle-2 {
+  bottom: -15%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--circle-color-2), transparent);
+  animation: float 30s ease-in-out infinite reverse;
+}
+
+.shape-circle-3 {
+  top: 40%;
+  right: 20%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--circle-color-3), transparent);
+  animation: float 20s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.shape-circle-4 {
+  bottom: 30%;
+  right: 10%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, var(--circle-color-4), transparent);
+  animation: float 22s ease-in-out infinite reverse;
+  animation-delay: -10s;
+}
+
+.shape-circle-5 {
+  top: 20%;
+  left: 15%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, var(--circle-color-5), transparent);
+  animation: float 18s ease-in-out infinite;
+  animation-delay: -7s;
+}
+
+/* Сетка точек */
+.dots {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--dots-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Анимации только для кругов */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-40px) translateX(20px);
+  }
+}
+
+/* Стили для контента */
+.MuiContainer-root {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== ШАПКА ========== */
+.MuiAppBar-root {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--footer-border);
+}
+
+.MuiAppBar-root .MuiButton-root {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--text-menu) !important;
+}
+
+.MuiAppBar-root .MuiButton-root:hover {
+  background-color: transparent !important;
+  color: var(--text-menu-hover) !important;
+}
+
+/* ========== ГЛОБАЛЬНЫЕ КНОПКИ (не в шапке) ========== */
+button:not(.MuiAppBar-root button) {
+  background: var(--button-bg) !important;
+  color: var(--button-text) !important;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+button:not(.MuiAppBar-root button):hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+/* ========== ЗАГОЛОВКИ (без анимаций) ========== */
 h1 {
-  font-size: 2.5rem; /* Увеличиваем размер шрифта */
-  font-weight: bold; /* Жирный шрифт */
-  margin-bottom: 16px; /* Отступ снизу */
-  color: #333; /* Цвет текста */
-  text-align: center; 
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  text-align: center;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Стили для параграфа p */
+h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif;
+}
+
 p {
-  font-size: 1.25rem; /* Увеличиваем размер шрифта */
-  color: #666; /* Цвет текста */
-  margin-bottom: 24px; /* Отступ снизу */
-  line-height: 1.6; /* Межстрочный интервал */
-  text-align: center; 
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.6;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
 }
 
-body.light {
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --primary: #1976d2;
-  --appbar-bg: #ffffff;
-  --appbar-text: #333333;
+/* ========== КАРТОЧКИ ========== */
+.MuiCard-root {
+  background-color: var(--card-bg) !important;
+  border-radius: 20px !important;
+  border: 1px solid var(--card-border) !important;
+  transition: var(--transition);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-body.dark {
-  --bg-color: #121212;
-  --text-color: #f5f5f5;
-  --primary: #90caf9;
-  --appbar-bg: #1e1e1e;
-  --appbar-text: #ffffff;
+.MuiCard-root:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Заголовки в карточках */
+.MuiCard-root .MuiTypography-h6,
+.MuiCard-root h6 {
+  color: var(--card-text-title) !important;
+  font-weight: 600 !important;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Текст в карточках */
+.MuiCard-root .MuiTypography-body2,
+.MuiCard-root p {
+  color: var(--card-text-description) !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Иконки в карточках */
+.MuiCard-root .MuiTypography-h2 {
+  color: var(--card-text-title) !important;
 }
 
-.card {
-  padding: 2em;
+/* Кнопки в карточках */
+.MuiCard-root .MuiButton-root {
+  background: transparent !important;
+  color: var(--card-text-title) !important;
+  box-shadow: none !important;
 }
 
-.read-the-docs {
-  color: #888;
+.MuiCard-root .MuiButton-root:hover {
+  background: transparent !important;
+  opacity: 0.7;
 }
 
- */
+/* ========== ТЕКСТОВЫЕ ПОЛЯ ========== */
+textarea, 
+.MuiTextField-root {
+  background: var(--card-bg) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--card-border) !important;
+  transition: var(--transition);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary) !important;
+}
+
+textarea:focus, 
+.MuiTextField-root:focus-within {
+  border-color: #3b82f6 !important;
+  outline: none;
+}
+
+/* ========== СЛАЙДЕР ========== */
+.MuiSlider-root {
+  color: var(--slider-color) !important;
+}
+
+.MuiSlider-track {
+  background: var(--slider-track) !important;
+}
+
+.MuiSlider-rail {
+  background-color: var(--slider-rail) !important;
+}
+
+.MuiSlider-thumb {
+  background-color: var(--slider-thumb) !important;
+}
+
+/* ========== ПОДВАЛ ========== */
+footer {
+  background-color: var(--footer-bg) !important;
+  border-top: 1px solid var(--footer-border) !important;
+}
+
+footer .MuiTypography-root {
+  color: var(--footer-text) !important;
+}
+
+/* ========== СКРОЛЛБАР ========== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--slider-rail);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--slider-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slider-track);
+}
+
+/* ========== ЦВЕТ ЛОГОТИПА "смысл.txt" В ШАПКЕ ========== */
+[data-theme="light"] header .MuiTypography-root,
+[data-theme="light"] .MuiAppBar-root .MuiTypography-root {
+  color: #1e293b !important;
+}
+
+[data-theme="dark"] header .MuiTypography-root,
+[data-theme="dark"] .MuiAppBar-root .MuiTypography-root {
+  color: #ffffff !important;
+}
+
+/* Текст описания сервиса */
+.service-description-text {
+  color: var(--text-primary) !important;
+}
+
+/* ========== ТЕМНАЯ ТЕМА: КОРРЕКЦИЯ ЦВЕТОВ ========== */
+
+/* Таблица статистики в темной теме */
+[data-theme="dark"] .MuiTable-root {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .MuiTableCell-root {
+  color: #e2e8f0 !important;
+  border-bottom-color: #334155 !important;
+}
+
+[data-theme="dark"] .MuiTableRow-root:hover .MuiTableCell-root {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Заголовки таблицы */
+[data-theme="dark"] .MuiTableRow-root .MuiTableCell-root:first-child {
+  color: #cbd5e1 !important;
+}
+
+/* Блоки с настройками облака слов */
+[data-theme="dark"] .settings-panel {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-theme="dark"] .MuiFormControl-root .MuiInputLabel-root {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .MuiFormControl-root .MuiInputLabel-root.Mui-focused {
+  color: #818cf8 !important;
+}
+
+[data-theme="dark"] .MuiSelect-select {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .MuiOutlinedInput-notchedOutline {
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] .MuiSelect-icon {
+  color: #94a3b8 !important;
+}
+
+/* Слайдер в темной теме */
+[data-theme="dark"] .MuiSlider-root {
+  color: #818cf8 !important;
+}
+
+[data-theme="dark"] .MuiSlider-rail {
+  background-color: #334155 !important;
+}
+
+[data-theme="dark"] .MuiSlider-track {
+  background-color: #818cf8 !important;
+}
+
+[data-theme="dark"] .MuiSlider-thumb {
+  background-color: #a5b4fc !important;
+}
+
+/* Typography в темной теме */
+[data-theme="dark"] .MuiTypography-root {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .MuiTypography-root.MuiTypography-h6 {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .MuiTypography-root.MuiTypography-h5 {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .MuiTypography-root.MuiTypography-h4 {
+  color: #f1f5f9 !important;
+}
+
+/* Карточки в темной теме */
+[data-theme="dark"] .MuiPaper-root {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+/* ========== ПЛЕЙСХОЛДЕРЫ В ТЕМНОЙ ТЕМЕ ========== */
+
+/* Текстовые поля (textarea, input) */
+[data-theme="dark"] textarea,
+[data-theme="dark"] .MuiTextField-root input,
+[data-theme="dark"] .MuiOutlinedInput-root input {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] textarea::placeholder,
+[data-theme="dark"] .MuiTextField-root input::placeholder,
+[data-theme="dark"] .MuiOutlinedInput-root input::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+/* Для InputTextArea компонента */
+[data-theme="dark"] .MuiInputBase-root textarea {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .MuiInputBase-root textarea::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+/* Для стандартных input */
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+/* ========== ANT DESIGN ТЕМНАЯ ТЕМА ========== */
+[data-theme="dark"] .ant-input,
+[data-theme="dark"] .ant-input-textarea,
+[data-theme="dark"] .ant-input-affix-wrapper {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] .ant-input::placeholder,
+[data-theme="dark"] .ant-input-textarea::placeholder {
+  color: #64748b !important;
+}
+
+[data-theme="dark"] .ant-input-data-count,
+[data-theme="dark"] .ant-input-suffix {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .ant-input:focus,
+[data-theme="dark"] .ant-input-focused {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* ========== ВЫПАДАЮЩИЕ МЕНЮ (SELECT) В ТЕМНОЙ ТЕМЕ ========== */
+
+/* Стили для самого select */
+[data-theme="dark"] .MuiSelect-select {
+  color: #e2e8f0 !important;
+  background-color: #1e293b !important;
+}
+
+/* Стили для выпадающего списка (Menu) */
+[data-theme="dark"] .MuiMenu-paper {
+  background-color: #1e293b !important;
+  border: 1px solid #475569 !important;
+}
+
+[data-theme="dark"] .MuiMenuItem-root {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .MuiMenuItem-root:hover {
+  background-color: #334155 !important;
+}
+
+[data-theme="dark"] .MuiMenuItem-root.Mui-selected {
+  background-color: #475569 !important;
+}
+
+/* Стили для метки (label) */
+[data-theme="dark"] .MuiInputLabel-root {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .MuiInputLabel-root.Mui-focused {
+  color: #818cf8 !important;
+}
+
+/* Стили для иконки стрелки */
+[data-theme="dark"] .MuiSelect-icon {
+  color: #94a3b8 !important;
+}
+
+/* Стили для обводки */
+[data-theme="dark"] .MuiOutlinedInput-notchedOutline {
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #818cf8 !important;
+}
+
+[data-theme="dark"] .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #818cf8 !important;
+}

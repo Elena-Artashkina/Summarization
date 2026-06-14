@@ -27,7 +27,7 @@ function OutputTextArea({ summary, loading, onSummaryChange }) {  // Добав�
       ) : (
         <TextArea
           rows={10}
-          placeholder="Здесь появится саммари"
+          placeholder="Здесь появится краткое содержание"
           value={previewValue}
           onChange={handleChange}  // Используем наш обработчик
           showCount

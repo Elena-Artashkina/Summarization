@@ -10,7 +10,7 @@ function BasicButtons({ onClick, disabled }) {
       onClick={onClick}
       // disabled={disabled}
       >
-        Суммаризовать
+        Обработать
       </Button>
     </Stack>
   );
